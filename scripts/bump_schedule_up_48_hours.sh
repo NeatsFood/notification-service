@@ -38,7 +38,6 @@ sched = scheduler.Scheduler()
 print(f'\n\nTime now UTC={dt.datetime.utcnow()}')
 
 devID='test_device_ID'
-#devID='EDU-39BD6A22-c4-b3-01-8d-9b-8c'
 
 print('\ncheck:')
 sched.check(devID)
@@ -55,8 +54,8 @@ print('\nbump hours to 49:')
 sched.set_testing_hours(49)
 sched.check(devID)
 
-print('\nbump hours to 169:')
-sched.set_testing_hours(169)
+print('\nbump hours to 180:')
+sched.set_testing_hours(180)
 sched.check(devID)
 
 

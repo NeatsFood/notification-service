@@ -57,25 +57,16 @@ ret=sched.get_command_dict(devID, sched.take_measurements_command)
 print(f'get_command_dict={ret}')
 
 print('\nmodify and replace take measurement command:')
-ret[sched.message_key]='Hi Rob, you overwrote the message'
-sched.replace_command(devID, ret)
+new_message='Rob modified the take measurements message'
+ret[sched.message_key]=new_message
+sched.update_command(devID, ret)
 ret=sched.to_str(devID)
 print(f'to_str={ret}')
 
-print('\nremove command take measurement:')
-sched.remove_command(devID, sched.take_measurements_command)
-ret=sched.to_str(devID)
-print(f'to_str={ret}')
-
-print('\nremove command that doesnt exist:')
-sched.remove_command(devID, 'missing_cmd')
-ret=sched.to_str(devID)
-print(f'to_str={ret}')
-
-print('\nremove all commands:')
-sched.remove_all_commands(devID)
-ret=sched.to_str(devID)
-print(f'to_str={ret}')
+print('\nverify command take measurement:')
+ret=sched.get_command_dict(devID, sched.take_measurements_command)
+if ret[sched.message_key] != new_message:
+    print(f'Error, message not replaced in {ret}')
 
 print('\ncheck:')
 sched.check(devID)
@@ -91,6 +82,21 @@ sched.check(devID)
 print('\nbump hours to 48:')
 sched.set_testing_hours(48)
 sched.check(devID)
+
+print('\nremove command take measurement:')
+sched.remove_command(devID, sched.take_measurements_command)
+ret=sched.to_str(devID)
+print(f'to_str={ret}')
+
+print('\nremove command that doesnt exist:')
+sched.remove_command(devID, 'missing_cmd')
+ret=sched.to_str(devID)
+print(f'to_str={ret}')
+
+print('\nremove all commands:')
+sched.remove_all_commands(devID)
+ret=sched.to_str(devID)
+print(f'to_str={ret}')
 
 
 
